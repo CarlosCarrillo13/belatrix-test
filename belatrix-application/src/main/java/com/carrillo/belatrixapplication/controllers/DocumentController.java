@@ -42,9 +42,14 @@ public class DocumentController {
 		}
 		if (request != null && request.getFilter() != null) {
 			messageContext.addItem(MessageContextItem.FILTER, request.getFilter());
-		} else {
+		} else if (request!=null) {
 			request = buildDefaultRequest(request);
 			messageContext.addItem(MessageContextItem.FILTER, request.getFilter());
+		}
+		else {
+			DocumentRequest documentRequest = new DocumentRequest();
+			documentRequest = buildDefaultRequest(documentRequest);
+			messageContext.addItem(MessageContextItem.FILTER, documentRequest.getFilter());
 		}
 		messageContext.addItem(MessageContextItem.COUNTER, 0);
 		getUrls(messageContext);
